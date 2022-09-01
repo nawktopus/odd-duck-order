@@ -1,1 +1,72 @@
 /* TODO: Make it awesome */
+
+body {
+    background-color: orange;
+    min-height: 100vh;
+    position: relative;
+    padding: 20px;
+    
+}
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif ;
+    font-size: large;
+}
+
+body > header {
+
+    display:flex; 
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-evenly;
+    width: 200px;
+ }
+
+ footer {
+    position: absolute;
+    left:20px;
+    bottom:20px;
+ }
+
+ .copy {
+    margin-top: 10px;
+ }
+
+ legend {
+    font-size: 25px;
+    font-weight: bolder;
+    margin-bottom: 10px;
+ }
+
+ th {
+    background-color: white;
+    width: 200px;
+    
+ }
+
+ tbody {
+
+    background-color: red;
+    text-align: center;
+    vertical-align: middle;
+   
+ }
+
+ td {
+    text-align: center;
+    vertical-align: middle;
+ }
+
+ td:last-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 300px;
+ } 
+ #cart {
+    margin-top: 20px;
+ }

@@ -49,7 +49,7 @@ function showCart() {
     tdQty.textContent = item.quantity;
     
     const tdDel = document.createElement('td');
-    tdDel.textContent = 'Remove';
+    tdDel.textContent = 'X';
     // const span = document.createElement('span');
     // span.textContent = 'X';
     // span.addEventListener('click', removeItemFromCart);
@@ -57,7 +57,7 @@ function showCart() {
     tdDel.addEventListener('click', removeItemFromCart);
 
     // TODO: Add the TR to the TBODY and each of the TD's to the TR
-    tr.append(tdItem, tdQty, tdDel);
+    tr.append(tdDel, tdQty, tdItem);
     tbody.append(tr);
 
   }
@@ -67,7 +67,7 @@ function showCart() {
 function removeItemFromCart(event) {
   // TODO: When a delete link is clicked, use cart.removeItem to remove the correct item
   const parent = event.target.parentNode;
-  const name = parent.querySelector('td:nth-of-type(1)').textContent; // get 2nd td element inside parent
+  const name = parent.querySelector('td:nth-of-type(3)').textContent; // get 2nd td element inside parent
   console.log(name);
 
   for (let item of cart.items) {
