@@ -2,6 +2,14 @@
 
 'use strict';
 
+function $(x) {
+  return document.querySelector(x);
+}
+
+function _(type) {
+  return document.createElement(type);
+}
+
 // Set up an empty cart for use on this page.
 const cart = new Cart([]);
 
@@ -11,8 +19,16 @@ function populateForm() {
 
   //TODO: Add an <option> tag inside the form's select for each product
   const selectElement = document.getElementById('items');
-  for (let i in Product.allProducts) {
+  const defaultOption = document.createElement('option');
+  defaultOption.value = '';
+  defaultOption.textContent = '-- Please Select a Product --'
+  selectElement.append(defaultOption);
 
+  for (let i in Product.allProducts) {
+    const option = document.createElement('option');
+    option.value = i;
+    option.textContent = Product.allProducts[i].name;
+    selectElement.append(option);
   }
 
 }
@@ -23,6 +39,7 @@ function populateForm() {
 function handleSubmit(event) {
 
   // TODO: Prevent the page from reloading
+  event.preventDefault();
 
   // Do all the things ...
   addSelectedItemToCart();
@@ -35,17 +52,49 @@ function handleSubmit(event) {
 // TODO: Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
   // TODO: suss out the item picked from the select list
+  const select = $('#items');
+
+  const product = Product.allProducts[select.value];
+
   // TODO: get the quantity
+  const qty = $('#quantity').value;
+
   // TODO: using those, add one item to the Cart
+  cart.addItem(product, qty);
 }
 
 // TODO: Update the cart count in the header nav with the number of items in the Cart
-function updateCounter() { }
+function updateCounter() {
+  const span = $('#itemCount');
+  span.innerHTML = '';
+  let count = 0;
+
+  for (let item of cart.items) {
+    console.log(item);
+    count += parseInt(item.quantity);
+    console.log(count);
+  }
+
+  span.textContent = count;
+}
 
 // TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
 function updateCartPreview() {
   // TODO: Get the item and quantity from the form
+  const select = $('#items');
+  const name = Product.allProducts[select.value].name;
+  const qty = $('#quantity').value;
+
   // TODO: Add a new element to the cartContents div with that information
+  const div = document.createElement('div');
+  const nameDiv = document.createElement('div');
+  nameDiv.textContent = name;
+  const qtyDiv = document.createElement('div');
+  qtyDiv.textContent = qty;
+  // div.textContent = `${name}: ${qty}`;
+  div.append(nameDiv, qtyDiv);
+
+  $('#cartContents').append(div);
 }
 
 // Set up the "submit" event listener on the form.
